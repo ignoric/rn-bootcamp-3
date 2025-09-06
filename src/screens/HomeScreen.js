@@ -2,6 +2,7 @@ import { View, StyleSheet, Text, Button } from "react-native";
 import { Myheader } from "../component/MyHearder";
 import { useState } from "react";
 import {Summary} from "../component/Summary";
+import { ProductList } from "../component/ProductList";
 
 export const HomeScreen = () => {
   const [data, setData] = useState(0);
@@ -10,6 +11,7 @@ export const HomeScreen = () => {
     <View style={styles.container}>
       <Myheader />
       <View style={styles.body}>
+        <ProductList />
         <Text style={styles.bodyText}>My data is: {data}</Text>
         <Button title="Click Me" onPress={() => setData(data + 1)} />
       </View>
