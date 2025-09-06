@@ -1,51 +1,36 @@
 import React from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { mockProducts } from '../model/mockData';
 
 export const ProductList = () => {
-  
-  const renderProductItem = ({ item }) => {
-    return (
-      <TouchableOpacity 
-        style={styles.productItem}
-        onPress={() => {
-          console.log(`กดเลือกสินค้า: ${item.name} - ราคา: ${item.price} บาท`);
-        }}
-        activeOpacity={0.7}
-      >
-        <View style={styles.productInfo}>
-          <Text style={styles.productId}>{item.id}</Text>
-          <Text style={styles.productName}>{item.name}</Text>
-          <Text style={styles.productCategory}>หมวดหมู่: {item.category}</Text>
-          <Text style={styles.productPrice}>ราคา: {item.price} บาท</Text>
-          <Text style={styles.productExpiry}>หมดอายุ: {item.expiryDate}</Text>
-        </View>
-      </TouchableOpacity>
-    );
-  };
-
   return (
     <View style={styles.container}>
-      <FlatList
-        data={mockProducts}
-        renderItem={renderProductItem}
-        keyExtractor={(item) => item.id}
+      <ScrollView
+        style={styles.scrollView}
+        contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={true}
-        contentContainerStyle={styles.listContainer}
-        style={styles.flatList}
-        scrollEnabled={true}
         bounces={true}
-        alwaysBounceVertical={false}
-        removeClippedSubviews={true}
-        maxToRenderPerBatch={10}
-        windowSize={10}
-        initialNumToRender={10}
-        getItemLayout={(data, index) => ({
-          length: 120, // ความสูงของแต่ละ item
-          offset: 120 * index,
-          index,
-        })}
-      />
+        scrollEnabled={true}
+      >
+        {mockProducts.map((item) => (
+          <TouchableOpacity 
+            key={item.id}
+            style={styles.productItem}
+            onPress={() => {
+              console.log(`กดเลือกสินค้า: ${item.name} - ราคา: ${item.price} บาท`);
+            }}
+            activeOpacity={0.7}
+          >
+            <View style={styles.productInfo}>
+              <Text style={styles.productId}>{item.id}</Text>
+              <Text style={styles.productName}>{item.name}</Text>
+              <Text style={styles.productCategory}>หมวดหมู่: {item.category}</Text>
+              <Text style={styles.productPrice}>ราคา: {item.price} บาท</Text>
+              <Text style={styles.productExpiry}>หมดอายุ: {item.expiryDate}</Text>
+            </View>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
     </View>
   );
 };
@@ -55,10 +40,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f5f5f5',
   },
-  flatList: {
+  scrollView: {
     flex: 1,
   },
-  listContainer: {
+  scrollContent: {
     padding: 10,
     paddingBottom: 20,
   },
