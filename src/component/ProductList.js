@@ -6,7 +6,13 @@ export const ProductList = () => {
   
   const renderProductItem = ({ item }) => {
     return (
-      <TouchableOpacity style={styles.productItem}>
+      <TouchableOpacity 
+        style={styles.productItem}
+        onPress={() => {
+          console.log(`กดเลือกสินค้า: ${item.name} - ราคา: ${item.price} บาท`);
+        }}
+        activeOpacity={0.7}
+      >
         <View style={styles.productInfo}>
           <Text style={styles.productId}>{item.id}</Text>
           <Text style={styles.productName}>{item.name}</Text>
@@ -25,8 +31,21 @@ export const ProductList = () => {
         data={mockProducts}
         renderItem={renderProductItem}
         keyExtractor={(item) => item.id}
-        showsVerticalScrollIndicator={false}
+        showsVerticalScrollIndicator={true}
         contentContainerStyle={styles.listContainer}
+        style={styles.flatList}
+        scrollEnabled={true}
+        bounces={true}
+        alwaysBounceVertical={false}
+        removeClippedSubviews={true}
+        maxToRenderPerBatch={10}
+        windowSize={10}
+        initialNumToRender={10}
+        getItemLayout={(data, index) => ({
+          length: 120, // ความสูงของแต่ละ item
+          offset: 120 * index,
+          index,
+        })}
       />
     </View>
   );
@@ -45,8 +64,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#4CAF50',
     color: '#fff',
   },
+  flatList: {
+    flex: 1,
+  },
   listContainer: {
     padding: 10,
+    paddingBottom: 20,
   },
   productItem: {
     backgroundColor: '#fff',
@@ -62,6 +85,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.22,
     shadowRadius: 2.22,
+    minHeight: 120, // กำหนดความสูงขั้นต่ำ
   },
   productInfo: {
     flex: 1,
