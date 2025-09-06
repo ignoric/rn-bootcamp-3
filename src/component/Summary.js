@@ -3,6 +3,19 @@ import { View, StyleSheet, Text } from "react-native";
 
 
 export const Summary = ({proptdata}) => {
+
+
+    useEffect(() => {
+        // คำนวณราคาเมื่อ proptdata เปลี่ยน
+        const calculatePrice = (quantity) => {
+            const unitPrice = 50;
+            const total = quantity * unitPrice;
+            console.log(`ราคารวม: ${total} บาท`);
+        };
+        
+        calculatePrice(proptdata);
+    }, [proptdata]); // dependency array มี proptdata
+
     return (
         <View style={styles.summaryContainer}>
             <Text style={styles.summaryText}>This is Summary Component : {proptdata}</Text>
