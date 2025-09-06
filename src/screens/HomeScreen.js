@@ -10,11 +10,7 @@ export const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <Myheader />
-      <View style={styles.body}>
-        <ProductList />
-        <Text style={styles.bodyText}>My data is: {data}</Text>
-        <Button title="Click Me" onPress={() => setData(data + 1)} />
-      </View>
+      <ProductList />
       <Summary proptdata={data}/>
     </View>
   );
@@ -24,16 +20,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-  },
-  body: {
-    flex: 1,
-    padding: 20,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  bodyText: {
-    fontSize: 18,
-    color: "#333",
   },
 });
 

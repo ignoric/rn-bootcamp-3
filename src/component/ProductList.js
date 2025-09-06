@@ -26,7 +26,6 @@ export const ProductList = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>รายการสินค้า</Text>
       <FlatList
         data={mockProducts}
         renderItem={renderProductItem}
@@ -55,14 +54,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f5f5f5',
-  },
-  header: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    padding: 20,
-    backgroundColor: '#4CAF50',
-    color: '#fff',
   },
   flatList: {
     flex: 1,
